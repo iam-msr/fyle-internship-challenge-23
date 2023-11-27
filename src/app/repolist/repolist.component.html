@@ -1,0 +1,46 @@
+<div>
+  <div>
+
+
+    <div *ngIf="isLoading" class="skeleton-loader"></div>
+
+
+    <ul *ngIf="!isLoading" class="m-8">
+
+
+      <div class="flex justify-between">
+        <p class="text-xl">
+          Repositories
+        </p>
+
+        <div class="">
+          <label for="perPageSelect">Repositories per page:</label>
+          <select id="perPageSelect" [(ngModel)]="perPage" (change)="onPerPageChange(perPage)">
+            <option *ngFor="let option of perPageOptions" [value]="option">
+              {{ option }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <li *ngFor="let repo of repos">
+          <div>
+            <p class="text-blue-600 text-xl m-0">{{ repo.name }}</p>
+            <p>{{ repo.description }}</p>
+
+
+            <div *ngIf="repo.topics && repo.topics.length > 0">
+
+              <ul class="topics">
+                <li class="bg-red-500 p-8" *ngFor="let topic of repo.topics">{{ topic }}</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+    <app-pagination [currentPage]="currentPage" [itemsPerPage]="perPage" [totalItems]="totalRepos"
+      (pageChange)="onPageChange($event)"></app-pagination>
+  </div>
+</div>
