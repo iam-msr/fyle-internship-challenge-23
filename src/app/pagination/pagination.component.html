@@ -1,0 +1,22 @@
+<!-- src/app/pagination/pagination.component.html -->
+<div class="pagination">
+  <button class="pagination-btn" [disabled]="!hasPrevious" (click)="onPreviousClick()">Previous</button>
+
+  <ng-container *ngIf="showFirstEllipsis">
+    <button class="pagination-btn" (click)="onPageClick(1)">1</button>
+    <span class="ellipsis">...</span>
+  </ng-container>
+
+  <ng-container *ngFor="let page of pages">
+    <button class="pagination-btn" [class.active]="currentPage === page" (click)="onPageClick(page)">
+      {{ page }}
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="showLastEllipsis">
+    <span class="ellipsis">...</span>
+    <button class="pagination-btn" (click)="onPageClick(totalPages)">{{ totalPages }}</button>
+  </ng-container>
+
+  <button class="pagination-btn" [disabled]="!hasNext" (click)="onNextClick()">Next</button>
+</div>
