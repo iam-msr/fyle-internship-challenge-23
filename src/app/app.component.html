@@ -1,5 +1,8 @@
-<div class="grid h-screen place-items-center">
-  <div class="font-bold text-3xl">
+<div class="grid h-screen ">
+  <div class="font-bold text-3xl text-center mt-5 mb-5 title">
     Fyle Internship Challenge
   </div>
+  <app-user-input (search)="onSearch($event)"></app-user-input>
+  <app-user-details [user]="userInfo"></app-user-details>
+  <app-repo-list [username]="searchedUsername"></app-repo-list>
 </div>
