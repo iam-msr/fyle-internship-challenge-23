@@ -1,5 +1,46 @@
-<div class="grid h-screen place-items-center">
-  <div class="font-bold text-3xl">
-    Fyle Internship Challenge
-  </div>
+<div>
+    <app-user-search (search)="searchUser($event)"></app-user-search>
+
+    <!-- <h1 *ngIf="searchClicked">User Profile:</h1> -->
+
+    <ng-container *ngIf="isValidUser" >
+    
+        <app-user-profile [searchedUser]="searchedUser"></app-user-profile>
+    
+    </ng-container>
+
+    <ng-container *ngIf="isInvalidUser">
+
+        <p>User not found!</p>
+
+    </ng-container>
+
+    <!-- <h1 *ngIf="searchClicked">User Repositories:</h1> -->
+
+    <ng-container *ngIf="isValidUser && totalRepoCount>0">
+      <div  > 
+        <h1><br/>User Repositories:</h1>
+
+        <app-repolist *ngIf="searchClicked" [repos]="repos"></app-repolist>
+
+        <app-pagination *ngIf="totalRepoCount > 0" 
+
+        [totalItems]="totalRepoCount"
+        [itemsPerPage]="itemsPerPage "
+        [currentPage]="currentPage"
+        [itemsPerPageOptions]="itemsPerPageOptions"
+        (pageChange)="changePage($event)"
+        (itemsPerPageChange)="changePerPage($event)">
+
+        </app-pagination>
+
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="isValidUser && totalRepoCount==0">
+
+        <p>No repositories found.</p>
+
+    </ng-container>
+
 </div>

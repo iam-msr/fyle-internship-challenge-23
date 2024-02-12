@@ -1,14 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from  '@angular/common/http';
+import { UserSearchComponent } from './user-search/user-search.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RepolistComponent } from './repolist/repolist.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserSearchComponent,
+    UserProfileComponent,
+    RepolistComponent,
+    PaginationComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule
   ],

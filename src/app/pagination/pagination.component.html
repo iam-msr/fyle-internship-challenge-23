@@ -1,0 +1,34 @@
+<div *ngIf="totalItems > 0" class="flex items-center flex-col md:gap-10 md:flex-row justify-center p-4 rounded-md">
+
+    <div>
+        <!-- Prev button -->
+        <button
+            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed"
+            (click)="prevPage()"
+            [disabled]="currentPage === 1">Prev
+        </button>
+
+        <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
+
+        <!-- Next button -->
+        <button
+            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed "
+            (click)="nextPage()"
+            [disabled]="currentPage === getTotalPages()">Next
+        </button>
+    </div>
+
+    <!-- Items per page -->
+    <div class="flex flex-row items-center gap-3 mt-6 md:mt-0">
+        <p>Items Per Page</p>
+        <select
+          [(ngModel)]="itemsPerPage"
+          (change)="itemsPerPageChange.emit(itemsPerPage)"
+          class="border rounded-md px-2 py-1.5 focus:outline-none">
+          <option *ngFor="let option of itemsPerPageOptions" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+
+</div>
