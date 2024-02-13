@@ -3,7 +3,7 @@
     <div>
         <!-- Prev button -->
         <button
-            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed"
+            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed bg-sky-900 text-gray-300"
             (click)="prevPage()"
             [disabled]="currentPage === 1">Prev
         </button>
@@ -12,7 +12,7 @@
 
         <!-- Next button -->
         <button
-            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed "
+            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed bg-sky-900 text-gray-300"
             (click)="nextPage()"
             [disabled]="currentPage === getTotalPages()">Next
         </button>
@@ -24,11 +24,11 @@
         <select
           [(ngModel)]="itemsPerPage"
           (change)="itemsPerPageChange.emit(itemsPerPage)"
-          class="border rounded-md px-2 py-1.5 focus:outline-none">
+          class="border rounded-md px-2 py-1.5 focus:outline-none bg-sky-900 text-gray-300">
           <option *ngFor="let option of itemsPerPageOptions" [value]="option">
             {{ option }}
           </option>
         </select>
-      </div>
+    </div>
 
 </div>
