@@ -19,12 +19,12 @@ Make sure you have the following software installed on your machine:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/github-repo-viewer.git
+   git clone https://github.com/iam-msr/fyle-internship-challenge-23.git
 
 2. Navigate to the project directory:
 
    ```bash
-   cd github-repo-viewer
+   cd fyle-internship-challenge-23
    ```
 3. Install the dependencies:
 
