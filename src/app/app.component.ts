@@ -35,7 +35,29 @@ export class AppComponent implements OnInit{
   // Dropdown options
   itemsPerPageOptions: number[] = [10, 30, 50, 70, 100];
 
+  // Cache for storing previously searched results keyed by username, page number and items per page values
+  private resultCache: Map<string, any[]> = new Map();
 
+  // Method to check if data is present in the cache
+private isDataInCache(username: string, page: number, perPage: number): boolean {
+  const key = `${username}_${page}_${perPage}`;
+  console.log("Checking if data is in cache");
+  return this.resultCache.has(key);
+}
+
+// Method to retrieve data from the cache
+private getDataFromCache(username: string, page: number, perPage: number): any {
+  const key = `${username}_${page}_${perPage}`;
+  console.log("Retrieving data from cache");
+  return this.resultCache.get(key);
+}
+
+// Method to store data in the cache
+private setDataInCache(username: string, page: number, perPage: number, data: any): void {
+  const key = `${username}_${page}_${perPage}`;
+  console.log("Storing data in cache");
+  this.resultCache.set(key, data);
+}
 
   searchUser(result: any): void {
     this.username = result.username;
@@ -86,8 +108,20 @@ export class AppComponent implements OnInit{
   }
 
   searchUserRepositories(): void {
-    this.reposLoading = true;
+
+    // Check if data is in the cache before making the API call
+    if (this.isDataInCache(this.username, this.currentPage, this.itemsPerPage)) {
+      // Retrieve data from the cache
+      this.repos = this.getDataFromCache(
+        this.username,
+        this.currentPage,
+        this.itemsPerPage
+      );
+      this.reposLoading = false;
+      this.scrollToRepos();
+    } else {
       // Data is not in the cache, make the API call
+      this.reposLoading = true;
       this.apiService
         .getUserRepos(this.username, this.currentPage, this.itemsPerPage)
         .subscribe({
@@ -95,16 +129,27 @@ export class AppComponent implements OnInit{
             // Updates repository information on successful retrieval
             this.repos = repos;
             this.reposLoading = false;
+            this.scrollToRepos();
+
+            // Cache the result for future use
+            this.setDataInCache(
+              this.username,
+              this.currentPage,
+              this.itemsPerPage,
+              repos
+            );
           },
           error: (error) => {
             // Handles errors in repository information retrieval
             this.repos = [];
             this.isValidUser = false;
             this.reposLoading = false;
+            this.scrollToRepos();
             console.error('Error loading repositories:', error);
             this.handleError('Error loading repositories. Please try again.');
           },
         });
+    }
     
   }
 
