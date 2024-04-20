@@ -4,8 +4,7 @@
         <!-- Prev button -->
         <button
             class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed bg-sky-900 text-gray-300"
-            (click)="prevPage()"
-            [disabled]="currentPage === 1">Prev
+            (click)="prevPage()" [disabled]="currentPage === 1">Prev
         </button>
 
         <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
@@ -13,21 +12,18 @@
         <!-- Next button -->
         <button
             class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed bg-sky-900 text-gray-300"
-            (click)="nextPage()"
-            [disabled]="currentPage === getTotalPages()">Next
+            (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next
         </button>
     </div>
 
     <!-- Items per page -->
     <div class="flex flex-row items-center gap-3 mt-6 md:mt-0">
         <p>Items Per Page</p>
-        <select
-          [(ngModel)]="itemsPerPage"
-          (change)="itemsPerPageChange.emit(itemsPerPage)"
-          class="border rounded-md px-2 py-1.5 focus:outline-none bg-sky-900 text-gray-300">
-          <option *ngFor="let option of itemsPerPageOptions" [value]="option">
-            {{ option }}
-          </option>
+        <select [(ngModel)]="itemsPerPage" (change)="itemsPerPageChange.emit(itemsPerPage)"
+            class="border rounded-md px-2 py-1.5 focus:outline-none bg-sky-900 text-gray-300">
+            <option *ngFor="let option of itemsPerPageOptions" [value]="option">
+                {{ option }}
+            </option>
         </select>
     </div>
 

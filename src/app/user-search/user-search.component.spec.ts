@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserSearchComponent } from './user-search.component';
+import { FormsModule } from '@angular/forms';
 
 describe('UserSearchComponent', () => {
   let component: UserSearchComponent;
@@ -8,7 +9,8 @@ describe('UserSearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserSearchComponent]
+      declarations: [UserSearchComponent],
+      imports: [FormsModule]
     });
     fixture = TestBed.createComponent(UserSearchComponent);
     component = fixture.componentInstance;

@@ -8,6 +8,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RepolistComponent } from './repolist/repolist.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { HeaderComponent } from './header/header.component';
+import { RepolistLoaderComponent } from './repolist-loader/repolist-loader.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { UserProfileLoaderComponent } from './user-profile-loader/user-profile-loader.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +19,15 @@ import { HeaderComponent } from './header/header.component';
     UserProfileComponent,
     RepolistComponent,
     PaginationComponent,
-    HeaderComponent
+    HeaderComponent,
+    RepolistLoaderComponent,
+    UserProfileLoaderComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

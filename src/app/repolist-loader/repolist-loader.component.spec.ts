@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserProfileComponent } from './user-profile.component';
+import { RepolistLoaderComponent } from './repolist-loader.component';
 import { NgxSkeletonLoaderComponent, NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
-describe('UserProfileComponent', () => {
-  let component: UserProfileComponent;
-  let fixture: ComponentFixture<UserProfileComponent>;
+describe('RepolistLoaderComponent', () => {
+  let component: RepolistLoaderComponent;
+  let fixture: ComponentFixture<RepolistLoaderComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UserProfileComponent, NgxSkeletonLoaderComponent],
+      declarations: [RepolistLoaderComponent, NgxSkeletonLoaderComponent],
       imports: [NgxSkeletonLoaderModule]
     });
-    fixture = TestBed.createComponent(UserProfileComponent);
+    fixture = TestBed.createComponent(RepolistLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,7 +2,7 @@
 
     <ul class="flex flex-wrap gap-4 list-none">
         <li *ngFor="let repo of repos" class="w-full">
-        
+
             <div class="shadow-md p-4 cursor-pointer border border-edge-dark rounded-md">
 
                 <h3 class="text-xl font-semibold mb-2"><i class="fa-solid fa-file-code"></i> {{ repo.name }}</h3>
@@ -10,10 +10,10 @@
                 <p class="mb-4">{{ repo.description }}</p>
                 <ng-container *ngIf="repo.topics && repo.topics.length > 0" class="flex">
                     <span *ngFor="let topic of repo.topics" class="px-2">
-                      {{ topic }}
+                        {{ topic }}
                     </span>
                 </ng-container>
-    
+
             </div>
 
         </li>
