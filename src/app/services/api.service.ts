@@ -1,22 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GithubRepository } from '../github.model';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
+
 export class ApiService {
 
-  constructor(
-    private httpClient: HttpClient
-  ) { }
-  private apiUrl = 'https://api.github.com';
+  // Base URL
+  private apiUrl = 'https://api.github.com/users';
+
+  constructor(private httpClient: HttpClient) { }
+
   getUser(githubUsername: string) {
     return this.httpClient.get(`https://api.github.com/users/${githubUsername}`);
   }
-  getRepos(githubUsername: string, page: number=1, perPage: number=10) {
-    return this.httpClient.get(`https://api.github.com/users/${githubUsername}/repos?page=${page}&per_page=${perPage}`);
+
+  getUserRepos(
+    username: string,
+    page: number,
+    perPage: number
+  ): Observable<any[]> {
+    const userUrl = `${this.apiUrl}/${username}/repos?page=${page}&per_page=${perPage}`;
+    return this.httpClient.get<any[]>(userUrl);
   }
-  
 }

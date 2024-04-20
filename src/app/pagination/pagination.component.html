@@ -1,22 +1,30 @@
-<!-- src/app/pagination/pagination.component.html -->
-<div class="pagination">
-  <button class="pagination-btn" [disabled]="!hasPrevious" (click)="onPreviousClick()">Previous</button>
+<div *ngIf="totalItems > 0" class="flex items-center flex-col md:gap-10 md:flex-row justify-center p-4 rounded-md">
 
-  <ng-container *ngIf="showFirstEllipsis">
-    <button class="pagination-btn" (click)="onPageClick(1)">1</button>
-    <span class="ellipsis">...</span>
-  </ng-container>
+    <div>
+        <!-- Prev button -->
+        <button
+            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed bg-sky-900 text-gray-300"
+            (click)="prevPage()" [disabled]="currentPage === 1">Prev
+        </button>
 
-  <ng-container *ngFor="let page of pages">
-    <button class="pagination-btn" [class.active]="currentPage === page" (click)="onPageClick(page)">
-      {{ page }}
-    </button>
-  </ng-container>
+        <span>Page {{ currentPage }} of {{ getTotalPages() }}</span>
 
-  <ng-container *ngIf="showLastEllipsis">
-    <span class="ellipsis">...</span>
-    <button class="pagination-btn" (click)="onPageClick(totalPages)">{{ totalPages }}</button>
-  </ng-container>
+        <!-- Next button -->
+        <button
+            class="px-4 py-1 mx-2 rounded-md disabled:opacity-70 disabled:cursor-not-allowed bg-sky-900 text-gray-300"
+            (click)="nextPage()" [disabled]="currentPage === getTotalPages()">Next
+        </button>
+    </div>
 
-  <button class="pagination-btn" [disabled]="!hasNext" (click)="onNextClick()">Next</button>
+    <!-- Items per page -->
+    <div class="flex flex-row items-center gap-3 mt-6 md:mt-0">
+        <p>Items Per Page</p>
+        <select [(ngModel)]="itemsPerPage" (change)="itemsPerPageChange.emit(itemsPerPage)"
+            class="border rounded-md px-2 py-1.5 focus:outline-none bg-sky-900 text-gray-300">
+            <option *ngFor="let option of itemsPerPageOptions" [value]="option">
+                {{ option }}
+            </option>
+        </select>
+    </div>
+
 </div>

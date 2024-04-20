@@ -1,0 +1,32 @@
+<div class="flex flex-col md:flex-row lg:flex-row sm:p-10 self-start bg-gray-100">
+  <!-- Profile Image -->
+  <div id="1" class="lg:w-full md:w-full p-5">
+    <img class="w-[300px] self-center" [src]="searchedUser?.avatar_url" alt="Profile Image" />
+  </div>
+
+  <!-- Profile Details -->
+  <div class="flex flex-col md:w-full lg:w-full p-5 justify-center" id="2">
+    <!-- name -->
+    <p class="text-2xl font-semibold mb-2">Name: {{ searchedUser?.name }}</p>
+
+    <!-- login -->
+    <p class="text-xl mb-2">Username: {{ searchedUser?.login }}</p>
+
+    <!-- bio -->
+    <p *ngIf="searchedUser?.bio" class="mb-4">Bio: {{ searchedUser?.bio }}</p>
+
+    <!-- followers following -->
+    <div class="flex items-center text-sm mb-2">
+      <i class="fas fa-users mr-1"></i>
+      <p>{{ searchedUser?.followers || 0 }} <span>followers</span></p>
+      <span class="mx-2">•</span>
+      <p>{{ searchedUser?.following || 0 }} <span>following</span></p>
+    </div>
+
+    <!-- location -->
+    <div *ngIf="searchedUser?.location" class="flex items-center">
+      <i class="fas fa-location-dot mr-1"></i>
+      <span>{{ searchedUser?.location }}</span>
+    </div>
+  </div>
+</div>

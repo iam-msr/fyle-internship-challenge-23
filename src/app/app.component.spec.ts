@@ -1,32 +1,69 @@
-import { TestBed } from '@angular/core/testing';
+// app.component.spec.ts
+import { ComponentFixture, TestBed,fakeAsync,tick } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http'; 
-import { UserInputComponent } from './user-input/user-input.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { RepolistComponent } from './repolist/repolist.component';
-import { PaginationComponent } from './pagination/pagination.component';
+import { HeaderComponent } from './header/header.component';
+import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserSearchComponent } from './user-search/user-search.component';
+import { ApiService } from './services/api.service';
+import { of } from 'rxjs';
+
+  // Mock GitHubApiService
+const githubServiceMock = {
+  getUser: () => of({ public_repos: 3 } as any),
+  getUserRepos: () => of([{ name: 'Repo 1' }, { name: 'Repo 2' }, { name: 'Repo 3'}] as any),
+};
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    declarations: [AppComponent,UserInputComponent,UserDetailsComponent,RepolistComponent,PaginationComponent],
-    imports: [HttpClientModule,FormsModule], 
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let githubService: ApiService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent,
+        HeaderComponent,
+        UserSearchComponent,
+        NgxSkeletonLoaderComponent,
+      ],
+      imports: [HttpClientModule, FormsModule],
+      providers: [{ provide: ApiService, useValue: githubServiceMock }],
+    });
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    githubService = TestBed.inject(ApiService);
+
+    fixture.detectChanges();
+  });
+
+  it('should create the app component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should have a title', () => {
+    expect(component.title).toBe('fyle-frontend-challenge');
+  });
+
+  it('should update user information on successful user search', fakeAsync(() => {
+    spyOn(githubService, 'getUser').and.returnValue(
+      of({ public_repos: 3 } as any)
+    );
+    component.searchUser({ username: 'test' });
+    tick();
+    expect(component.isValidUser).toBeTruthy();
+    expect(component.totalRepoCount).toBe(3);
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  it('should update repositories on successful repository search', fakeAsync(() => {
+    spyOn(githubService, 'getUserRepos').and.returnValue(
+      of([{ name: 'Repo 1' }, { name: 'Repo 2' }, {name: 'Repo 3'}] as any)
+    );
+    component.searchUser({ username: 'test' });
+    tick();
+    expect(component.repos.length).toBe(3);
+  }));
 
-  it('should call onSearch method when search button is clicked', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    spyOn(app, 'onSearch');
-    const button = fixture.nativeElement.querySelector('button');
-    button.click();
-    expect(app.onSearch).toHaveBeenCalled();
-  });
-  
 });
-

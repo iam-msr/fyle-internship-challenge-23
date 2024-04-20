@@ -1,5 +1,4 @@
-// src/app/pagination/pagination.component.ts
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component,Input,Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -7,53 +6,31 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent {
-  @Input() currentPage: number = 1;
+  @Input() totalItems: number = 0;
   @Input() itemsPerPage: number = 10;
-  @Input() totalItems: number;
+  @Input() currentPage: number = 1;
+  @Input() itemsPerPageOptions: number[] = [10, 30, 50, 70, 100];
 
-  @Output() pageChange: EventEmitter<number> = new EventEmitter();
+  @Output() pageChange = new EventEmitter<number>();
+  @Output() itemsPerPageChange = new EventEmitter<number>();
 
-  get totalPages(): number {
+  getTotalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
-  get hasPrevious(): boolean {
-    return this.currentPage > 1;
-  }
-
-  get hasNext(): boolean {
-    return this.currentPage < this.totalPages;
-  }
-
-  get showFirstEllipsis(): boolean {
-    return this.currentPage > 3;
-  }
-
-  get showLastEllipsis(): boolean {
-    return this.totalPages - this.currentPage > 2;
-  }
-
-  get pages(): number[] {
-    const pagesToShow = Math.min(5, this.totalPages);
-    const startPage = Math.max(1, this.currentPage - Math.floor(pagesToShow / 2));
-    return Array.from({ length: pagesToShow }, (_, i) => startPage + i);
-  }
-
-  onPageClick(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.pageChange.emit(page);
+  nextPage(): void {
+    if (this.currentPage < this.getTotalPages()) {
+      this.currentPage++;
+      this.pageChange.emit(this.currentPage);
     }
   }
 
-  onPreviousClick(): void {
-    if (this.hasPrevious) {
-      this.pageChange.emit(this.currentPage - 1);
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.pageChange.emit(this.currentPage);
     }
   }
 
-  onNextClick(): void {
-    if (this.hasNext) {
-      this.pageChange.emit(this.currentPage + 1);
-    }
-  }
+
 }

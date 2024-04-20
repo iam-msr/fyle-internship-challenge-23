@@ -1,30 +1,35 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from  '@angular/common/http';
-import { MatPaginatorModule } from '@angular/material/paginator';
-
-import { ApiService } from './services/api.service';
 import { AppComponent } from './app.component';
-import { UserInputComponent } from './user-input/user-input.component';
+import { HttpClientModule } from  '@angular/common/http';
+import { UserSearchComponent } from './user-search/user-search.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RepolistComponent } from './repolist/repolist.component';
 import { PaginationComponent } from './pagination/pagination.component';
-import { UserDetailsComponent } from './user-details/user-details.component';
+import { HeaderComponent } from './header/header.component';
+import { RepolistLoaderComponent } from './repolist-loader/repolist-loader.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { UserProfileLoaderComponent } from './user-profile-loader/user-profile-loader.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    UserInputComponent,
+    UserSearchComponent,
+    UserProfileComponent,
     RepolistComponent,
     PaginationComponent,
-    UserDetailsComponent
+    HeaderComponent,
+    RepolistLoaderComponent,
+    UserProfileLoaderComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
-    FormsModule,
-    MatPaginatorModule
+    NgxSkeletonLoaderModule
   ],
-  providers: [ApiService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
