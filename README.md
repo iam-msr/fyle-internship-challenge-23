@@ -53,9 +53,10 @@ Make sure you have the following software installed on your machine:
 
 ## Error Handling
 
-- Error messages are logged to the console for different scenarios:
-  - When the API returns a 403 status code (API rate limit exceeded), an error message is logged: "API rate limit exceeded. Please try after some time."
-  - For other error statuses, a generic error message is logged: "Error loading [data]. Please try again."
+- Error messages are logged to the console as well as displayed on screen for different scenarios:
+  - When the API returns a 403 status code (API rate limit exceeded), an error message is logged and displayed: "API rate limit exceeded. Please try after some time."
+  - When the API returns a 404 status code (user not found), an error message is logged and displayed: "User not found. Please enter a valid username."
+  - For other error statuses, a generic error message is logged and displayed: "Error loading [data]. Please try again."
 
 ## Caching
 

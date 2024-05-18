@@ -8,7 +8,7 @@
 
   <div class="w-full">
     <!-- User profile -->
-    <h1 *ngIf="searchClicked" class="font-bold text-2xl underline underline-offset-4">User Profile:</h1>
+    <h1 *ngIf="searchClicked" class="font-bold text-2xl underline underline-offset-4 my-2">User Profile:</h1>
 
     <ng-container *ngIf="userLoading; else userLoaded">
       <app-user-profile-loader></app-user-profile-loader>
@@ -19,7 +19,9 @@
         <app-user-profile [searchedUser]="searchedUser"></app-user-profile>
       </ng-container>
       <ng-template #isNotValidUser>
-        <p>User not found!</p>
+        <p style="color:red; font-weight:bold;font-size:xx-large;text-align:center;margin:auto;margin-bottom:40px">
+          {{ errorMessage }}
+        </p>
       </ng-template>
     </ng-template>
 
@@ -29,7 +31,7 @@
   <div class="w-full" id="repolist">
 
     <!-- Repositories section -->
-    <h1 *ngIf="searchClicked" class="font-bold text-2xl underline underline-offset-4 mb-4">User Repositories:</h1>
+    <h1 *ngIf="searchClicked" class="font-bold text-2xl underline underline-offset-4 my-2">User Repositories:</h1>
 
     <ng-container *ngIf="reposLoading; else repolist">
       <ng-container *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]">

@@ -19,6 +19,9 @@ export class AppComponent implements OnInit{
   // Username property
   username: string = '';
 
+  //Handling error messages
+  errorMessage: string = '';
+  
   // State properties
   repos: any[] = [];
   totalRepoCount: number = 0;
@@ -98,11 +101,14 @@ private setDataInCache(username: string, page: number, perPage: number, data: an
   
         if (error.status === 404) {
           this.handleError('User not found. Please enter a valid GitHub username.');
+          this.errorMessage = 'User not found. Please enter a valid GitHub username.';
         } else if (error.status === 403) {
           this.handleError('API rate limit exceeded. Please try after some time.');
+          this.errorMessage = 'API rate limit exceeded. Please try after some time.';
         }
         else {
           this.handleError('Error loading user details.');
+          this.errorMessage = 'Error loading user details.';
         }
       },
     });
@@ -146,11 +152,7 @@ private setDataInCache(username: string, page: number, perPage: number, data: an
             this.isValidUser = false;
             this.reposLoading = false;
             this.scrollToRepos();
-            if (error.status === 403) {
-              this.handleError('API rate limit exceeded. Please try after some time.');
-            } else {
             this.handleError('Error loading repositories.');
-            }
           },
         });
     }
@@ -167,12 +169,14 @@ private setDataInCache(username: string, page: number, perPage: number, data: an
     console.log(errorMessage);
   }
 
+  // Method to handle the change in items per page
   changePerPage(itemsPerPage: number): void {
     this.itemsPerPage = itemsPerPage;
     this.currentPage = 1;
     this.searchUserRepositories();
   }
 
+  // Method to handle the change in page number
   changePage(page: number): void {
     this.currentPage = page;
     this.searchUserRepositories();
