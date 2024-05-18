@@ -26,7 +26,11 @@ Make sure you have the following software installed on your machine:
    ```bash
    cd fyle-internship-challenge-23
    ```
-3. Install the dependencies:
+3. To install Angular CLI (if not already installed), run:
+  ```bash
+  npm install -g @angular/cli
+  ```
+4. Install the dependencies:
 
    ```bash
    npm install
@@ -46,12 +50,46 @@ Make sure you have the following software installed on your machine:
 
 1. Enter a GitHub username in the input field and click the "Search" button.
 2. The user's repositories will be displayed in a list.
-3. By default, username 'johnpapa' is displayed.
+
+### Error Handling
+
+- Error messages are logged to the console for different scenarios:
+  - When the API returns a 403 status code (API rate limit exceeded), an error message is logged: "API rate limit exceeded. Please try after some time."
+  - For other error statuses, a generic error message is logged: "Error loading [data]. Please try again."
+
+### Caching
+
+- **Checking if data is in cache:** Before making an API call, it checks whether the API call is already made in the current session and is present in the cache. This helps avoid unnecessary API calls and improves performance.
+
+- **Storing data in cache:** When data is fetched from the GitHub API, it is stored in the cache for future use. This cached data is associated with specific parameters such as the username, page number, and items per page, allowing for efficient retrieval later.
+
+- **Retrieving data from cache:** If the requested data is found in the cache, it is retrieved and used instead of making a new API call. This retrieval process ensures that previously fetched data is reused.
 
 ### Running the Tests
 
-Run the unit tests:
+To run the tests, run the following command
 
 ```bash
 ng test
 ```
+This command will open a browser window and run all the tests in your project. The results will be displayed in the terminal as well as in the browser.
+
+### Unit Tests
+
+#### ApiService
+
+- **Service Creation Test**: Ensures that the ApiService is successfully created.
+
+- **User Information Retrieval Test**: Verifies that getUser retrieves user information from the GitHub API.
+
+- **User Repositories Retrieval Test with Pagination**: Checks that getUserRepos retrieves user repositories with pagination from the GitHub API.
+
+#### AppComponent
+
+- **Component Creation Test**: Verifies that the AppComponent is successfully created.
+
+- **Title Test**: Checks that the app component has the expected title.
+
+- **User Information Update Test**: Ensures that user information is updated correctly upon successful user search.
+
+- **Repository Update Test**: Checks that repositories are updated correctly upon successful repository search.

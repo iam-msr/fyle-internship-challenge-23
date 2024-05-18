@@ -97,11 +97,12 @@ private setDataInCache(username: string, page: number, perPage: number, data: an
         this.userLoading = false;
   
         if (error.status === 404) {
-          console.error('User not found:', error);
           this.handleError('User not found. Please enter a valid GitHub username.');
-        } else {
-          console.error('Error loading user details:', error);
-          this.handleError('Error loading user details. Please try again.');
+        } else if (error.status === 403) {
+          this.handleError('API rate limit exceeded. Please try after some time.');
+        }
+        else {
+          this.handleError('Error loading user details.');
         }
       },
     });
@@ -145,8 +146,11 @@ private setDataInCache(username: string, page: number, perPage: number, data: an
             this.isValidUser = false;
             this.reposLoading = false;
             this.scrollToRepos();
-            console.error('Error loading repositories:', error);
-            this.handleError('Error loading repositories. Please try again.');
+            if (error.status === 403) {
+              this.handleError('API rate limit exceeded. Please try after some time.');
+            } else {
+            this.handleError('Error loading repositories.');
+            }
           },
         });
     }
