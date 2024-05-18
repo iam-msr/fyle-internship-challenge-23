@@ -6,7 +6,7 @@ This is a single-page application (SPA) built with Angular that allows users to 
 
 Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+## Prerequisites
 
 Make sure you have the following software installed on your machine:
 
@@ -14,7 +14,7 @@ Make sure you have the following software installed on your machine:
 - [npm](https://www.npmjs.com/) (Node Package Manager)
 - [Angular CLI](https://angular.io/cli)
 
-### Installing
+## Installing
 
 1. Clone the repository:
 
@@ -36,7 +36,7 @@ Make sure you have the following software installed on your machine:
    npm install
    ```
 
-### Running the Application
+## Running the Application
 
 1. Run the application:
 
@@ -46,18 +46,18 @@ Make sure you have the following software installed on your machine:
 2. Open your browser and navigate to `http://localhost:4200/`.
 
 
-### Using the Application
+## Using the Application
 
 1. Enter a GitHub username in the input field and click the "Search" button.
 2. The user's repositories will be displayed in a list.
 
-### Error Handling
+## Error Handling
 
 - Error messages are logged to the console for different scenarios:
   - When the API returns a 403 status code (API rate limit exceeded), an error message is logged: "API rate limit exceeded. Please try after some time."
   - For other error statuses, a generic error message is logged: "Error loading [data]. Please try again."
 
-### Caching
+## Caching
 
 - **Checking if data is in cache:** Before making an API call, it checks whether the API call is already made in the current session and is present in the cache. This helps avoid unnecessary API calls and improves performance.
 
@@ -65,7 +65,7 @@ Make sure you have the following software installed on your machine:
 
 - **Retrieving data from cache:** If the requested data is found in the cache, it is retrieved and used instead of making a new API call. This retrieval process ensures that previously fetched data is reused.
 
-### Running the Tests
+## Running the Tests
 
 To run the tests, run the following command
 
@@ -74,9 +74,9 @@ ng test
 ```
 This command will open a browser window and run all the tests in your project. The results will be displayed in the terminal as well as in the browser.
 
-### Unit Tests
+## Unit Tests
 
-#### ApiService
+### ApiService
 
 - **Service Creation Test**: Ensures that the ApiService is successfully created.
 
@@ -84,7 +84,7 @@ This command will open a browser window and run all the tests in your project. T
 
 - **User Repositories Retrieval Test with Pagination**: Checks that getUserRepos retrieves user repositories with pagination from the GitHub API.
 
-#### AppComponent
+### AppComponent
 
 - **Component Creation Test**: Verifies that the AppComponent is successfully created.
 
